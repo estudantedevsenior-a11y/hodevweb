@@ -385,3 +385,82 @@ document.getElementById("send").addEventListener("click", handleFormSubmit);
 // ============================
 // terms
 // ============================
+
+let acceptTerms = false
+
+function terms() {
+  return `
+    <div class="lgpd-overlay" role="dialog" aria-modal="true" aria-labelledby="lgpdTitle">
+      <style>
+        .lgpd-overlay{position:fixed;inset:0;background:rgba(2,6,23,0.55);display:flex;align-items:center;justify-content:center;z-index:9999}
+        .lgpd-modal{width:min(760px,94vw);background:#fff;border-radius:12px;padding:18px;box-shadow:0 10px 40px rgba(2,6,23,0.35);max-height:86vh;overflow:auto;font-family:Arial,sans-serif;color:#1f2937}
+        .lgpd-header{display:flex;gap:12px;align-items:center}
+        .lgpd-title{font-size:18px;font-weight:700}
+        .lgpd-body{margin-top:10px}
+        .lgpd-points{margin:12px 0;padding-left:18px;color:#6b7280}
+        .lgpd-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+        .lgpd-check{display:flex;align-items:center;gap:8px;margin-top:12px}
+        .link{color:#1B65A6;text-decoration:none}
+        button.lgpd-btn{padding:8px 12px;border-radius:8px;border:0;cursor:pointer;font-size:14px}
+        button.lgpd-decline{background:transparent;color:#374151}
+        button.lgpd-accept{background:#1B65A6;color:#fff}
+        button.lgpd-accept[disabled]{opacity:0.6;cursor:not-allowed}
+      </style>
+
+      <div class="lgpd-modal">
+        <div class="lgpd-header">
+          <div style="width:44px;height:44px;background:linear-gradient(180deg,#1B65A6,#145085);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700">HW</div>
+          <div>
+            <div id="lgpdTitle" class="lgpd-title">Termos de Uso e Tratamento de Dados (LGPD)</div>
+            <div style="font-size:13px;color:#6b7280">hodevweb.com.br — coleta limitada para contato futuro</div>
+          </div>
+        </div>
+
+        <div class="lgpd-body">
+          <p>Ao aceitar, você concorda que os dados que fornecer no formulário de contato (nome, e-mail e mensagem) serão armazenados e utilizados apenas para fins de comunicação futura relacionada ao seu contato. Esta base legal fundamenta-se no <strong>consentimento</strong> (Art. 7º, LGPD).</p>
+
+          <ul class="lgpd-points">
+            <li><strong>Finalidade:</strong> responder seu contato e enviar comunicações relacionadas.</li>
+            <li><strong>Limitação:</strong> apenas dados do formulário serão captados.</li>
+            <li><strong>Retenção:</strong> guardaremos seus dados pelo tempo necessário.</li>
+            <li><strong>Seus direitos:</strong> acesso, correção, exclusão, revogação do consentimento — contate <a class="link" href="mailto:privacy@hodevweb.com.br">privacy@hodevweb.com.br</a>.</li>
+          </ul>
+
+          <div class="lgpd-check">
+            <input type="checkbox" id="lgpdAcceptCheck">
+            <label for="lgpdAcceptCheck" style="margin:0">Eu li e aceito que meus dados sejam usados conforme descrito acima.</label>
+          </div>
+
+          <div style="margin-top:10px;font-size:13px;color:#374151">
+            <small>Mais detalhes em <a class="link" href="https://www.hodevweb.com.br/" target="_blank" rel="noopener">hodevweb.com.br</a>. Você pode revogar o consentimento a qualquer momento.</small>
+          </div>
+        </div>
+
+        <div class="lgpd-actions">
+          <button id="lgpdDecline" class="lgpd-btn lgpd-decline" type="button">Recusar</button>
+          <button id="lgpdAccept" class="lgpd-btn lgpd-accept" type="button" disabled>Aceitar e salvar</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// https://chatgpt.com/share/68bf0ce5-2490-800c-aa45-3c78e62e5228
+function openTerms() {
+  const wrapper = document.createElement("div");
+  wrapper.innerHTML = terms();
+  wrapper.id = "terms-modal";
+  document.body.appendChild(wrapper);
+
+  // agora adiciona os eventos
+  wrapper.querySelector("#lgpdDecline").addEventListener("click", closeTerms);
+  wrapper.querySelector("#lgpdAccept").addEventListener("click", closeTerms);
+}
+
+function closeTerms(event) {
+  console.log("Fechando modal via:", event.target.id);
+  document.getElementById("terms-modal")?.remove();
+}
+
+
+function acceptedOrNotTerms() { }
