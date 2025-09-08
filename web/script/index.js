@@ -381,3 +381,7 @@ async function handleFormSubmit(event) {
 // Init
 // ============================
 document.getElementById("send").addEventListener("click", handleFormSubmit);
+
+// ============================
+// terms
+// ============================
