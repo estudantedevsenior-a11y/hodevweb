@@ -446,21 +446,49 @@ function terms() {
 }
 
 // https://chatgpt.com/share/68bf0ce5-2490-800c-aa45-3c78e62e5228
-function openTerms() {
+// https://chatgpt.com/share/68c1aadb-ab38-800c-819b-93a37d0cd1bd Solução para os erros atuais
+function templateModal() {
   const wrapper = document.createElement("div");
   wrapper.innerHTML = terms();
-  wrapper.id = "terms-modal";
-  document.body.appendChild(wrapper);
 
-  // agora adiciona os eventos
-  wrapper.querySelector("#lgpdDecline").addEventListener("click", closeTerms);
-  wrapper.querySelector("#lgpdAccept").addEventListener("click", closeTerms);
+  return wrapper
 }
 
+function appendInBody(element) {
+  document.body.appendChild(element)
+}
+
+function openTerms() {
+  const wrapper = templateModal()
+  wrapper.id = "terms-modal";
+  appendInBody(wrapper);
+
+}
+// // agora adiciona os eventos
+// wrapper.querySelector("#lgpdDecline").addEventListener("click", closeTerms);
+// wrapper.querySelector("#lgpdAccept").addEventListener("click", closeTerms);
+
 function closeTerms(event) {
+  const wrapper = templateModal()
+  wrapper.id = "terms-modal";
+  console.log("Fechando modal via:", event.target.id);
+  wrapper.querySelector("#lgpdDecline").addEventListener("click", document.getElementById("terms-modal")?.remove());
+  wrapper.querySelector("#lgpdDecline").addEventListener("clicked");
+}
+
+function closeTermsByRefuse(event) {
   console.log("Fechando modal via:", event.target.id);
   document.getElementById("terms-modal")?.remove();
 }
 
+function acceptedOrNotTerms(acceptOrNot) {
+  switch (acceptOrNot) {
+    case "yes":
+      return "accepted"
+    case "no":
+      return "notAccepted"
+    default:
+      return "notAccepted"
+  }
+}
 
-function acceptedOrNotTerms() { }
